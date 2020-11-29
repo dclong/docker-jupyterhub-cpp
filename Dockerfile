@@ -1,7 +1,8 @@
 FROM dclong/jupyterhub
 
-RUN curl -sSL https://raw.githubusercontent.com/root-project/cling/master/tools/packaging/cpt.py | python3 - \
-    --create-dev-env Debug --with-workdir=./cling-build/
+RUN curl -sSL https://raw.githubusercontent.com/root-project/cling/master/tools/packaging/cpt.py -o /tmp/cpt.py \
+    && python3 /tmp/cpt.py --check-requirements -y \
+    && python3 /tmp/cpt.py --create-dev-env Debug --with-workdir=./cling-build/ -y
 
 #apt-get install libtinfo5
 #mkdir -p ~/pre && cd ~/pre
